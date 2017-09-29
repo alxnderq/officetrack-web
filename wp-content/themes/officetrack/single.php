@@ -14,7 +14,6 @@ get_header("news"); ?>
 					<div class="bottom-right">
 					<div class="social">
 						<?php
-							/*jeff para jalar un customfield de otra pagina solo ponle el id de su url en el caso del home es 25*/
 							$social = get_field("social",25);
 							if (!empty($social)){
 								foreach ($social as $item) {

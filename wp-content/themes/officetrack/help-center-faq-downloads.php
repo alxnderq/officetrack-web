@@ -1,14 +1,17 @@
 <?php
 /*
-Template Name: Contact us
+Template Name: Help center faq downloads
 */
 
-get_header('contact-us'); ?>
+get_header('help-center-faq'); ?>
 
         <div class="section-inner">
             <div class="cta-container">
                 <div class="splash">
                     <h1><?php the_field("titulo"); ?></h1>
+                    <div class="container-button">
+                        <a href="<?php the_field("link-faq") ?>"><button class="button-blue"><?php the_field("btn-faq") ?></button></a>
+                    </div>
                 </div>
             </div>
             <div class="cta-container-bottom">
@@ -40,37 +43,48 @@ get_header('contact-us'); ?>
             </div>
         </div>
     </section>
-    <section id="content" class="info info-backgroundcolor">
-        <div class="section-assistance">
-            <div class="section-inner">
-                <div class="form">
-                    <h2><?php the_field("form-titulo"); ?></h2>
-                    <p class="comment-gray comment-center"><?php the_field("form-descripcion"); ?></p>
-                    <div class="form-content">
+    <section id="content" class="section-downloads info info-backgroundcolor">
+        <div class="column-left">
+            <h3><?php the_field("technical-material-titulo"); ?></h3>
+            <?php
+                $technical_material_list = get_field("technical-material-list");
+                if (!empty($technical_material_list)){
+                    ?>
+                    <div class="column">
                         <?php
-                            get_shortcode_regex('[contact-form-7 id="126" title="Contact us"]')
-                        ?>
-                    </div>
-                    <div class="container">
-                        <?php
-                            $form_country_list = get_field("form-country-list");
-                            if (!empty($form_country_list)){
-                                foreach ($form_country_list as $item){
-                                    ?>
-                                    <div class="telefons">
-                                        <img src="<?php echo $item["imagen"];?>" width="44" height="25" vspace="13">
-                                        <h5><?php echo $item["titulo"];?></h5>
-                                        <p><?php echo $item["descripcion"];?></p>
-                                    </div>
-                                    <?php
-                                }
+                            foreach ($technical_material_list as $item){
+                                ?>
+                                <span><a href="<?php echo $item["link"]; ?>"><?php echo $item["titulo"]; ?></a></span>
+                                <?php
                             }
                         ?>
                     </div>
+                    <?php
+                }
+            ?>
+        </div>
+        <div class="column-right">
+            <h3><?php the_field("user-guide-titulo"); ?></h3>
+            <?php
+            $user_guide_list = get_field("user-guide-list");
+            if (!empty($user_guide_list)){
+                ?>
+                <div class="column">
+                    <?php
+                    foreach ($user_guide_list as $item){
+                        ?>
+                        <span><a href="<?php echo $item["link"]; ?>"><?php echo $item["titulo"]; ?></a></span>
+                        <?php
+                    }
+                    ?>
                 </div>
-            </div>
+                <?php
+            }
+            ?>
         </div>
     </section>
 
-
+<?php
+include("templates/request-demo.php");
+?>
 <?php get_footer(); ?>

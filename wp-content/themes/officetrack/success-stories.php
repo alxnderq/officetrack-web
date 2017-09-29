@@ -1,9 +1,9 @@
 <?php
 /*
-Template Name: Contact us
+Template Name: Success Stories
 */
 
-get_header('contact-us'); ?>
+get_header('success-stories'); ?>
 
         <div class="section-inner">
             <div class="cta-container">
@@ -40,37 +40,29 @@ get_header('contact-us'); ?>
             </div>
         </div>
     </section>
-    <section id="content" class="info info-backgroundcolor">
-        <div class="section-assistance">
+    <section id="content" class="info">
+        <div class="section-news">
             <div class="section-inner">
-                <div class="form">
-                    <h2><?php the_field("form-titulo"); ?></h2>
-                    <p class="comment-gray comment-center"><?php the_field("form-descripcion"); ?></p>
-                    <div class="form-content">
-                        <?php
-                            get_shortcode_regex('[contact-form-7 id="126" title="Contact us"]')
-                        ?>
-                    </div>
-                    <div class="container">
-                        <?php
-                            $form_country_list = get_field("form-country-list");
-                            if (!empty($form_country_list)){
-                                foreach ($form_country_list as $item){
-                                    ?>
-                                    <div class="telefons">
-                                        <img src="<?php echo $item["imagen"];?>" width="44" height="25" vspace="13">
-                                        <h5><?php echo $item["titulo"];?></h5>
-                                        <p><?php echo $item["descripcion"];?></p>
-                                    </div>
-                                    <?php
-                                }
+                <div class="section-news-card">
+                    <?php
+                        $stories = get_field("stories");
+                        if(!empty($stories)){
+                            foreach ($stories as $item){
+                                ?>
+                                <li class="success-card">
+                                    <img src="<?php echo $item["imagen"]?>" width="542" height="743">
+                                    <div class="text"></div>
+                                </li>
+                                <?php
                             }
-                        ?>
-                    </div>
+                        }
+                    ?>
                 </div>
             </div>
         </div>
     </section>
 
-
+<?php
+include("templates/request-demo.php");
+?>
 <?php get_footer(); ?>
